@@ -8,4 +8,6 @@ public interface DeveloperService {
 
 	public List<Developer> findAllDevelopers();
 	
+	public Developer findDeveloperById(Long id);
+	
 }
