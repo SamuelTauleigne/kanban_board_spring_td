@@ -60,13 +60,13 @@ public class LoadDatabase {
 
 
             TaskStatus todoStatus = new TaskStatus();
-            todoStatus.setLabel("To Do");
+            todoStatus.setLabel("TODO");
             taskStatusRepository.save(todoStatus);
             TaskStatus doingStatus = new TaskStatus();
-            doingStatus.setLabel("Doing");
+            doingStatus.setLabel("DOING");
             taskStatusRepository.save(doingStatus);
             TaskStatus doneStatus = new TaskStatus();
-            doneStatus.setLabel("Done");
+            doneStatus.setLabel("DONE");
             taskStatusRepository.save(doneStatus);
 
             Task task1 = new Task();

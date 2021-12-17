@@ -32,7 +32,7 @@ public class TaskController {
 	}
 	
 	@PostMapping("/tasks")
-	Task createTasks(@RequestBody Task task) {
+	Task createTask(@RequestBody Task task) {
 		return this.taskServiceImpl.createTask(task);
 	}
 	
@@ -42,13 +42,13 @@ public class TaskController {
 		Task task = this.taskServiceImpl.findTask(id);
 		
 		if (Constants.MOVE_LEFT_ACTION.equals(taskMoveAction.getAction())) {
-			this.taskServiceImpl.moveLeftTask(task);
+			return this.taskServiceImpl.moveLeftTask(task);
 		}
 		else {
-			this.taskServiceImpl.moveRightTask(task);
+			return this.taskServiceImpl.moveRightTask(task);
 		}
 		
-		return this.taskServiceImpl.createTask(task);
+		// return this.taskServiceImpl.createTask(task);
 	}
 
 }

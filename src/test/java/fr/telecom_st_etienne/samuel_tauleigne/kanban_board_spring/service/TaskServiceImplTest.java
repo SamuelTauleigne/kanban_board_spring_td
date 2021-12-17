@@ -3,7 +3,7 @@ package fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.service;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+// import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -78,53 +78,57 @@ class TaskServiceImplTest {
 		assertEquals(status2, changeLog.getTargetStatus());		
 	}
 	
-	@Test
-	public void testDisplayMoveRightForTask() {
-		
-		TaskStatus todoStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
-		
-		TaskStatus doingStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DOING_ID);
-				
-		TaskStatus doneStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
-		
-		Task task = new Task();
-		
-		task.setStatus(todoStatus);
-		
-		assertTrue(this.taskServiceImpl.displayMoveRightForTask(task));
-		
-		task.setStatus(doingStatus);
-		
-		assertTrue(this.taskServiceImpl.displayMoveRightForTask(task));
-		
-		task.setStatus(doneStatus);
-		
-		assertFalse(this.taskServiceImpl.displayMoveRightForTask(task));
-	}
-	
-	@Test
-	public void testDisplayMoveLeftForTask() {
-		
-		TaskStatus todoStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
-		
-		TaskStatus doingStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DOING_ID);
-				
-		TaskStatus doneStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
-		
-		Task task = new Task();
-		
-		task.setStatus(todoStatus);
-		
-		assertFalse(this.taskServiceImpl.displayMoveLeftForTask(task));
-		
-		task.setStatus(doingStatus);
-		
-		assertTrue(this.taskServiceImpl.displayMoveLeftForTask(task));
-		
-		task.setStatus(doneStatus);
-		
-		assertTrue(this.taskServiceImpl.displayMoveLeftForTask(task));
-	}
+	/*
+	 * @Test public void testDisplayMoveRightForTask() {
+	 * 
+	 * TaskStatus todoStatus =
+	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
+	 * 
+	 * TaskStatus doingStatus =
+	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DOING_ID);
+	 * 
+	 * TaskStatus doneStatus =
+	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
+	 * 
+	 * Task task = new Task();
+	 * 
+	 * task.setStatus(todoStatus);
+	 * 
+	 * assertTrue(this.taskServiceImpl.displayMoveRightForTask(task));
+	 * 
+	 * task.setStatus(doingStatus);
+	 * 
+	 * assertTrue(this.taskServiceImpl.displayMoveRightForTask(task));
+	 * 
+	 * task.setStatus(doneStatus);
+	 * 
+	 * assertFalse(this.taskServiceImpl.displayMoveRightForTask(task)); }
+	 * 
+	 * @Test public void testDisplayMoveLeftForTask() {
+	 * 
+	 * TaskStatus todoStatus =
+	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
+	 * 
+	 * TaskStatus doingStatus =
+	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DOING_ID);
+	 * 
+	 * TaskStatus doneStatus =
+	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
+	 * 
+	 * Task task = new Task();
+	 * 
+	 * task.setStatus(todoStatus);
+	 * 
+	 * assertFalse(this.taskServiceImpl.displayMoveLeftForTask(task));
+	 * 
+	 * task.setStatus(doingStatus);
+	 * 
+	 * assertTrue(this.taskServiceImpl.displayMoveLeftForTask(task));
+	 * 
+	 * task.setStatus(doneStatus);
+	 * 
+	 * assertTrue(this.taskServiceImpl.displayMoveLeftForTask(task)); }
+	 */
 	
 	@Test
 	public void testMoveRightTask() {
