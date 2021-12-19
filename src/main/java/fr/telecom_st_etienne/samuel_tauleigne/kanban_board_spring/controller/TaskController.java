@@ -40,21 +40,21 @@ public class TaskController {
 	private TaskServiceImpl taskServiceImpl;
 	
 	@GetMapping("/tasks")
-	@ApiOperation("Returns list of all Tasks")
+	@ApiOperation("${task.get}")
 	Collection<Task> findAllTasks() {
 		return this.taskServiceImpl.findAllTasks();
 	}
 	
 	@PostMapping("/tasks")
-	@ApiOperation("Creates a Task")
-	Task createTask(@ApiParam("Task to be created") @Valid @RequestBody Task task) {
+	@ApiOperation("${task.create}")
+	Task createTask(@ApiParam("${task.param}") @Valid @RequestBody Task task) {
 		return this.taskServiceImpl.createTask(task);
 	}
 	
 	@PatchMapping("/tasks/{id}")
-	@ApiOperation("Moves a Task")
-	Task moveTask(@ApiParam("Action to be applied to the task") @RequestBody TaskMoveAction taskMoveAction,
-			@ApiParam("ID of the task to be moved") @PathVariable Long id) {
+	@ApiOperation("${task.move}")
+	Task moveTask(@ApiParam("${action.param}") @RequestBody TaskMoveAction taskMoveAction,
+			@ApiParam("${id.param}") @PathVariable Long id) {
 		
 		Task task = this.taskServiceImpl.findTask(id);
 		

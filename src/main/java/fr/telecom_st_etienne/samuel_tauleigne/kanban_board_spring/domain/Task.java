@@ -26,13 +26,29 @@ import lombok.ToString;
 public class Task {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@ApiModelProperty(notes = "Unique identifier of the task", example = "1", required = true, position = 0)
+	@ApiModelProperty(notes = "${task.id}", example = "1L", required = true, position = 0)
 	public Long id;
 	
-	private @Column(nullable=false, unique=true) @NotBlank(message = "title is mandatory") String title;
-	private @Column(nullable=false) @NotNull(message = "nbHoursForecast can't be null") @Min(0) Integer nbHoursForecast;
-	private @Column(nullable=false) @NotNull(message = "nbHoursReal can't be null") Integer nbHoursReal;
-	private @Column(nullable=false) @NotNull(message = "created can't be null") LocalDate created;
+	@Column(nullable=false, unique=true)
+	@NotBlank(message = "title is mandatory")
+	@ApiModelProperty(notes = "${task.title}", example = "Titre", required = true, position = 1)
+	private String title;
+	
+	@Column(nullable=false)
+	@NotNull(message = "nbHoursForecast can't be null")
+	@Min(1)
+	@ApiModelProperty(notes = "${task.nbHoursForecast}", example = "15", required = true, position = 2)
+	private Integer nbHoursForecast;
+	
+	@Column(nullable=false)
+	@NotNull(message = "nbHoursReal can't be null")
+	@ApiModelProperty(notes = "${task.nbHoursReal}", example = "12", required = true, position = 3)
+	private Integer nbHoursReal;
+	
+	@Column(nullable=false)
+	@NotNull(message = "created can't be null")
+	@ApiModelProperty(notes = "${task.created}", required = true, position = 4)
+	private LocalDate created;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@EqualsAndHashCode.Exclude
