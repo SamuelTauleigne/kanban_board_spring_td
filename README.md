@@ -3,9 +3,7 @@ Discovering Spring &amp; Spring Boot developing a Kanban Board
 
 ---
 
-Following the steps indicated in the subject, I did steps 1 & 2 : all unit tests are passing.
-
-I started the third step implementing Developer, Task and TaskStatus Services but it's not working properly at the moment : only 50% of the unit tests are passing.
+Following the steps indicated in the subject, I did all the back-end of the application : all unit tests are passing.
 
 ---
 
