@@ -42,6 +42,7 @@ public class ChangeLogRepositoryTest {
 		List<ChangeLog> changeLogs = this.changeLogRepository.findByTaskId(task.getId());
 		
 		Assert.assertEquals(1, changeLogs.size());
+		
 	}
 	
 }

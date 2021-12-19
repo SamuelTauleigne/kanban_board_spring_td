@@ -32,4 +32,5 @@ public interface TaskService {
 	public Collection<TaskType> findAllTaskTypes();
 	
 	public Collection<TaskStatus> findAllTaskStatus();
+	
 }
