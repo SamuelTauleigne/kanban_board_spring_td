@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -87,6 +88,19 @@ class TaskControllerTest extends ControllerTest {
     	
     	Assert.assertEquals("TODO", this.taskServiceImpl.findTask(1L).getStatus().getLabel());
     	
+    }
+
+    // Testing my error message for "title" entry missing !
+    @Test
+    public void whenPostRequestToTasksAndInValidTask_thenCorrectResponse() throws Exception {
+    	String invalidTaskAsJSONString = "{\"title\":\"\",\"nbHoursForecast\":\"0\",\"nbHoursReal\":\"0\",\"created\":\"" + LocalDate.now() + "\"}";
+        mockMvc.perform(post("/tasks")
+          .content(invalidTaskAsJSONString)
+          .contentType(MediaType.APPLICATION_JSON))
+          .andExpect(MockMvcResultMatchers.status().isBadRequest())
+          .andExpect(MockMvcResultMatchers.jsonPath("$.title", Is.is("title is mandatory")))
+          .andExpect(MockMvcResultMatchers.content()
+            .contentType(MediaType.APPLICATION_JSON));
     }
     
 }
