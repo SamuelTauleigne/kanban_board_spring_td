@@ -61,11 +61,10 @@ public class TaskController {
 		if (Constants.MOVE_LEFT_ACTION.equals(taskMoveAction.getAction())) {
 			return this.taskServiceImpl.moveLeftTask(task);
 		}
-		else {
+		else { // MOVE_RIGHT_ACTION
 			return this.taskServiceImpl.moveRightTask(task);
 		}
 		
-		// return this.taskServiceImpl.createTask(task);
 	}
 	
 	

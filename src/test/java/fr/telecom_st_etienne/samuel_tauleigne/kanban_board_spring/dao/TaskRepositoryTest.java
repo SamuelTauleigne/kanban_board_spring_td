@@ -50,7 +50,7 @@ class TaskRepositoryTest {
         // Asserting the task is saved
         tasks = taskRepository.findAll();
         assertEquals(3, tasks.size());
-        assertEquals("To Do", new_task.getStatus().getLabel());
+        assertEquals("TODO", new_task.getStatus().getLabel());
     }
 	
 	@Test

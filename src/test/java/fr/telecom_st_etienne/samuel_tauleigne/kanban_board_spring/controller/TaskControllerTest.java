@@ -51,7 +51,7 @@ class TaskControllerTest extends ControllerTest {
     @Test
 	public void testCreateTask() throws Exception {
 		
-    	String taskAsJSONString = "{\"title\":\"Titre\",\"nbHoursForecast\":\"0\",\"nbHoursReal\":\"0\",\"created\":\"" + LocalDate.now() + "\"}";
+    	String taskAsJSONString = "{\"title\":\"Titre\",\"nbHoursForecast\":\"2\",\"nbHoursReal\":\"0\",\"created\":\"" + LocalDate.now() + "\"}";
 		
 		mockMvc.perform(post("/tasks")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -63,7 +63,7 @@ class TaskControllerTest extends ControllerTest {
 		Collection<Task> tasks = this.taskServiceImpl.findAllTasks();
 		Assert.assertEquals(3, tasks.size());
 		Assert.assertEquals("Titre", this.taskServiceImpl.findTask(3L).getTitle());
-		Assert.assertEquals(0, this.taskServiceImpl.findTask(3L).getNbHoursForecast().intValue());
+		Assert.assertEquals(2, this.taskServiceImpl.findTask(3L).getNbHoursForecast().intValue());
 		Assert.assertEquals(0, this.taskServiceImpl.findTask(3L).getNbHoursReal().intValue());
 		
 	}

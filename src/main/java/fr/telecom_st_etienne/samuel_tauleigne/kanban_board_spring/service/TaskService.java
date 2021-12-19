@@ -21,10 +21,6 @@ public interface TaskService {
 
 	public Collection<ChangeLog> findChangeLogsForTask(Task task);
 	
-	// public boolean displayMoveRightForTask(Task task);
-	
-	// public boolean displayMoveLeftForTask(Task task);
-	
 	public Task moveRightTask(Task task);
 	
 	public Task moveLeftTask(Task task);

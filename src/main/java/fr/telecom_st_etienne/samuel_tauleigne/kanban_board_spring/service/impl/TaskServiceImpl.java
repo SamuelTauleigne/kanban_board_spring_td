@@ -2,7 +2,6 @@ package fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.service.impl;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.dao.TaskReposi
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.dao.TaskStatusRepository;
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.dao.TaskTypeRepository;
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.domain.ChangeLog;
-import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.domain.Developer;
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.domain.Task;
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.domain.TaskStatus;
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.domain.TaskType;
@@ -44,49 +42,42 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<Task> findAllTasks() {
-		
 		return this.taskRepository.findAll();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<TaskType> findAllTaskTypes() {
-		
 		return this.taskTypeRepository.findAll();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<TaskStatus> findAllTaskStatus() {
-		
 		return this.taskStatusRepository.findAll();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Task findTask(Long id) {
-		
 		return this.taskRepository.findById(id).orElse(null);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public TaskStatus findTaskStatus(Long id) {
-		
 		return this.taskStatusRepository.findById(id).orElse(null);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public TaskType findTaskType(Long id) {
-		
 		return this.taskTypeRepository.findById(id).orElse(null);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<ChangeLog> findChangeLogsForTask(Task task) {
-		
 		return this.changeLogRepository.findByTaskId(task.getId());
 	}
 
@@ -109,32 +100,10 @@ public class TaskServiceImpl implements TaskService {
 		return task;
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @Transactional(readOnly = true) public boolean displayMoveRightForTask(Task
-	 * task) {
-	 * 
-	 * TaskStatus done = this.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
-	 * 
-	 * return !task.getStatus().equals(done); }
-	 * 
-	 * @Override
-	 * 
-	 * @Transactional(readOnly = true) public boolean displayMoveLeftForTask(Task
-	 * task) {
-	 * 
-	 * TaskStatus todo = this.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
-	 * 
-	 * return !task.getStatus().equals(todo); }
-	 */
-
 	@Override
 	@Transactional
-	public Task moveRightTask(Task task) {
-		
+	public Task moveRightTask(Task task) {	
 		TaskStatus targetStatus = this.getTargetStatusForMoveRight(task.getStatus());
-		
 		return this.changeTaskStatus(task, targetStatus);
 	}
 
@@ -165,6 +134,7 @@ public class TaskServiceImpl implements TaskService {
 			}
 		}
 		else {
+			
 			throw new IllegalArgumentException();
 		}
 		
@@ -174,9 +144,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	@Transactional
 	public Task moveLeftTask(Task task) {
-		
 		TaskStatus targetStatus = this.getTargetStatusForMoveLeft(task.getStatus());
-		
 		return this.changeTaskStatus(task, targetStatus);
 	}
 
@@ -207,6 +175,7 @@ public class TaskServiceImpl implements TaskService {
 			}
 		}
 		else {
+			
 			throw new IllegalArgumentException();
 		}
 		
@@ -216,19 +185,6 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	@Transactional
 	public Task createTask(Task task) {
-		
-		TaskStatus todoStatus = this.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
-		TaskType featureType = this.findTaskType(Constants.TASK_TYPE_FEATURE_ID);
-		
-//		task.setTitle("Titre");
-//		task.setNbHoursForecast(0);
-//		task.setNbHoursReal(0);
-//		task.setCreated(LocalDate.now());
-		task.setDevelopers(new HashSet<Developer>());
-		task.setType(featureType);
-		task.setStatus(todoStatus);
-		
-
 		return this.taskRepository.save(task);
 	}
 
@@ -246,6 +202,8 @@ public class TaskServiceImpl implements TaskService {
 		}
 		
 		this.taskRepository.delete(task);
+		
+		return;
 	}
 
 }

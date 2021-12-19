@@ -1,9 +1,9 @@
 package fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.service;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
-// import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -31,26 +31,20 @@ class TaskServiceImplTest {
 	private DeveloperServiceImpl developerServiceImpl;
 	
 	@Test
-	public void testFindAllTasks() {
-		
+	public void testFindAllTasks() {		
 		Collection<Task> tasks = this.taskServiceImpl.findAllTasks();
-		
 		assertEquals(2, tasks.size());
 	}
 	
 	@Test
 	public void testFindAllTaskTypes() {
-		
 		Collection<TaskType> taskTypes = this.taskServiceImpl.findAllTaskTypes();
-		
 		assertEquals(2, taskTypes.size());
 	}
 	
 	@Test
 	public void testFindAllTaskStatus() {
-		
 		Collection<TaskStatus> taskStatus = this.taskServiceImpl.findAllTaskStatus();
-		
 		assertEquals(3, taskStatus.size());
 	}
 	
@@ -78,58 +72,6 @@ class TaskServiceImplTest {
 		assertEquals(status2, changeLog.getTargetStatus());		
 	}
 	
-	/*
-	 * @Test public void testDisplayMoveRightForTask() {
-	 * 
-	 * TaskStatus todoStatus =
-	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
-	 * 
-	 * TaskStatus doingStatus =
-	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DOING_ID);
-	 * 
-	 * TaskStatus doneStatus =
-	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
-	 * 
-	 * Task task = new Task();
-	 * 
-	 * task.setStatus(todoStatus);
-	 * 
-	 * assertTrue(this.taskServiceImpl.displayMoveRightForTask(task));
-	 * 
-	 * task.setStatus(doingStatus);
-	 * 
-	 * assertTrue(this.taskServiceImpl.displayMoveRightForTask(task));
-	 * 
-	 * task.setStatus(doneStatus);
-	 * 
-	 * assertFalse(this.taskServiceImpl.displayMoveRightForTask(task)); }
-	 * 
-	 * @Test public void testDisplayMoveLeftForTask() {
-	 * 
-	 * TaskStatus todoStatus =
-	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_TODO_ID);
-	 * 
-	 * TaskStatus doingStatus =
-	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DOING_ID);
-	 * 
-	 * TaskStatus doneStatus =
-	 * this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
-	 * 
-	 * Task task = new Task();
-	 * 
-	 * task.setStatus(todoStatus);
-	 * 
-	 * assertFalse(this.taskServiceImpl.displayMoveLeftForTask(task));
-	 * 
-	 * task.setStatus(doingStatus);
-	 * 
-	 * assertTrue(this.taskServiceImpl.displayMoveLeftForTask(task));
-	 * 
-	 * task.setStatus(doneStatus);
-	 * 
-	 * assertTrue(this.taskServiceImpl.displayMoveLeftForTask(task)); }
-	 */
-	
 	@Test
 	public void testMoveRightTask() {
 		
@@ -142,10 +84,10 @@ class TaskServiceImplTest {
 		TaskStatus doneStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
 		
 		Task task = new Task();
-		task.setNbHoursForecast(0);
+		task.setNbHoursForecast(2);
 		task.setNbHoursReal(0);
 		task.setTitle("title");
-		// task.setType(taskServiceImpl.findTaskType(1L));
+		task.setCreated(LocalDate.now());
 		task.setStatus(todoStatus);
 		task.addDeveloper(developer);
 		
@@ -188,14 +130,14 @@ class TaskServiceImplTest {
 		TaskStatus doneStatus = this.taskServiceImpl.findTaskStatus(Constants.TASK_STATUS_DONE_ID);
 		
 		Task task = new Task();
-		task.setNbHoursForecast(0);
+		task.setNbHoursForecast(2);
 		task.setNbHoursReal(0);
-		task.setTitle("title");		
+		task.setTitle("title");
+		task.setCreated(LocalDate.now());
+		task.setStatus(doneStatus);
 		task.addDeveloper(developer);
 		
 		task = this.taskServiceImpl.createTask(task);
-		task = this.taskServiceImpl.moveRightTask(task); // => DOING
-		task = this.taskServiceImpl.moveRightTask(task); // => DONE
 		
 		task = this.taskServiceImpl.moveLeftTask(task);
 		
@@ -203,7 +145,7 @@ class TaskServiceImplTest {
 		
 		Collection<ChangeLog> changeLogs = this.taskServiceImpl.findChangeLogsForTask(task);
 		
-		assertEquals(3, changeLogs.size());
+		assertEquals(1, changeLogs.size());
 		
 		boolean lastChangeLogFound = false;
 		
@@ -225,7 +167,7 @@ class TaskServiceImplTest {
 		
 		changeLogs = this.taskServiceImpl.findChangeLogsForTask(task);
 		
-		assertEquals(4, changeLogs.size());
+		assertEquals(2, changeLogs.size());
 		
 		this.taskServiceImpl.deleteTask(task);
 	}
