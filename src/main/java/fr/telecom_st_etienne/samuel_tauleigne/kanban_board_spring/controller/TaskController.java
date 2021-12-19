@@ -26,8 +26,12 @@ import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.service.impl.T
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.utils.Constants;
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.utils.LoadDatabase;
 import fr.telecom_st_etienne.samuel_tauleigne.kanban_board_spring.utils.TaskMoveAction;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
+@Api(description = "Set of endpoints for GET, POST, PATCH on Tasks")
 public class TaskController {
 	
 	Logger log = LoggerFactory.getLogger(LoadDatabase.class);
@@ -36,17 +40,21 @@ public class TaskController {
 	private TaskServiceImpl taskServiceImpl;
 	
 	@GetMapping("/tasks")
+	@ApiOperation("Returns list of all Tasks")
 	Collection<Task> findAllTasks() {
 		return this.taskServiceImpl.findAllTasks();
 	}
 	
 	@PostMapping("/tasks")
-	Task createTask(@Valid @RequestBody Task task) {
+	@ApiOperation("Creates a Task")
+	Task createTask(@ApiParam("Task to be created") @Valid @RequestBody Task task) {
 		return this.taskServiceImpl.createTask(task);
 	}
 	
 	@PatchMapping("/tasks/{id}")
-	Task moveTask(@RequestBody TaskMoveAction taskMoveAction, @PathVariable Long id) {
+	@ApiOperation("Moves a Task")
+	Task moveTask(@ApiParam("Action to be applied to the task") @RequestBody TaskMoveAction taskMoveAction,
+			@ApiParam("ID of the task to be moved") @PathVariable Long id) {
 		
 		Task task = this.taskServiceImpl.findTask(id);
 		

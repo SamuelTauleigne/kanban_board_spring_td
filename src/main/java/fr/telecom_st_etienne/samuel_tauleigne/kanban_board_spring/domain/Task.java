@@ -12,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -23,10 +25,12 @@ import lombok.ToString;
 @Entity
 public class Task {
 	
-	public @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@ApiModelProperty(notes = "Unique identifier of the task", example = "1", required = true, position = 0)
+	public Long id;
 	
 	private @Column(nullable=false, unique=true) @NotBlank(message = "title is mandatory") String title;
-	private @Column(nullable=false) @NotNull(message = "nbHoursForecast can't be null") Integer nbHoursForecast;
+	private @Column(nullable=false) @NotNull(message = "nbHoursForecast can't be null") @Min(0) Integer nbHoursForecast;
 	private @Column(nullable=false) @NotNull(message = "nbHoursReal can't be null") Integer nbHoursReal;
 	private @Column(nullable=false) @NotNull(message = "created can't be null") LocalDate created;
 	
